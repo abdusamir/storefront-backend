@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import errorMiddleware from './middlewares/error.middleware';
 
 dotenv.config();
 const PORT = process.env.PORT || 3030;
@@ -16,7 +17,13 @@ app.get('/', (_req: Request, res: Response) => {
     message: 'Welcome to storefront API from Fullstack Nanodegree',
   });
 });
-
+app.use((_req: Request, res: Response) => {
+  res.status(404).json({
+    message: 'Endpoint not found, wront URL',
+  });
+});
+app.use(errorMiddleware);
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);
 });
+export default app;
