@@ -16,6 +16,7 @@ app.get('/', (_req: Request, res: Response) => {
     message: 'Welcome to storefront API from Fullstack Nanodegree',
   });
 });
+
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);
 });
