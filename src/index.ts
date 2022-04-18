@@ -3,8 +3,9 @@ import morgan from 'morgan';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import errorMiddleware from './middlewares/error.middleware';
-import productRoutes from './handlers/products.handler';
+import productRoutes from './handlers/products_handler';
 import userRoutes from './handlers/user_handler';
+import orderRoutes from './handlers/order_handler';
 
 dotenv.config();
 const PORT = process.env.PORT || 3030;
@@ -21,6 +22,7 @@ app.get('/', (_req: Request, res: Response) => {
 });
 productRoutes(app);
 userRoutes(app);
+orderRoutes(app);
 app.use(errorMiddleware);
 app.use((_req: Request, res: Response) => {
   res.status(404).json({
