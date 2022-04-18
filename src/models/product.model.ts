@@ -52,7 +52,7 @@ export class ProductStore {
     try {
       const conn = await client.connect();
       const query = 'SELECT * FROM products WHERE category =$1';
-      const result = await conn.query(query,[category]);
+      const result = await conn.query(query, [category]);
       conn.release();
       return result.rows;
     } catch (err) {
