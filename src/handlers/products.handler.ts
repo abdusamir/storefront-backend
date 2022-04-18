@@ -1,6 +1,7 @@
 import { Product, ProductStore } from '../models/product.model';
 import { Request, Response, Application } from 'express';
 import verifyAuth from '../middlewares/verifyAuth';
+
 const store = new ProductStore();
 
 const index = async (_req: Request, res: Response) => {

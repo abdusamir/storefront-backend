@@ -44,7 +44,7 @@ export class UserStore {
       if (!result.rows.length) {
         const conn = await client.connect();
         const query1 =
-          'INSERT INTO users (email,first_name,last_name,password) VALUES ($1, $2, $3, $4)';
+          'INSERT INTO users (email,first_name,last_name,password) VALUES ($1, $2, $3, $4) RETURNING *';
         const hash = bcrypt.hashSync(
           (user.password as string) + (pepper as string),
           parseInt(salt_rounds as string)
