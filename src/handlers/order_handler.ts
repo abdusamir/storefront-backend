@@ -1,11 +1,11 @@
 import { Order, OrderStore, OrderProducts } from '../models/order.model';
-import verifyAuth from '../middlewares/verifyAuth';
+import {verifyUser} from '../middlewares/verifyAuth';
 import { Request, Response, Application } from 'express';
 
 const store = new OrderStore();
 
 const CurrentOrders = async (req: Request, res: Response) => {
-  const id = req.params.user_id;
+  const id = req.params.userId;
   try {
     const orders: Order[] = await store.index(parseInt(id), 'open');
     if (orders.length) {
@@ -28,7 +28,7 @@ const CurrentOrders = async (req: Request, res: Response) => {
 };
 
 const completeOrders = async (req: Request, res: Response) => {
-  const id = req.params.user_id;
+  const id = req.params.userId;
   try {
     const orders: Order[] = await store.index(parseInt(id), 'complete');
     if (orders.length) {
@@ -51,12 +51,11 @@ const completeOrders = async (req: Request, res: Response) => {
 };
 
 const addProduct = async (req: Request, res: Response) => {
-  const order_id = req.params.orderId;
-  const product_id = req.params.productId;
-  const quantity = req.query.quantity;
+  //const user_id = req.params.userId;
+  const {order_id,product_id,quantity} = req.body
   try {
     const orderProduct: OrderProducts = await store.addProduct(
-      parseInt(quantity as unknown as string),
+      parseInt(quantity),
       parseInt(order_id),
       parseInt(product_id)
     );
@@ -71,15 +70,28 @@ const addProduct = async (req: Request, res: Response) => {
     });
   }
 };
-
+const create= async (req: Request, res: Response)=>{
+  const user_id = req.params.userId;
+  try{ 
+    const order:Order = await store.create(parseInt(user_id));
+    res.status(200).json({
+      status: 200,
+      order:order,
+      message: 'Order created successfully'
+    });
+  }catch(err){
+    res.status(400).json({message: 'Could not create order'});
+  }
+}
 const orderRoutes = (app: Application) => {
-  app.get('/api/orders/:user_id', CurrentOrders);
-  app.get('/api/orders/:user_id/complete', completeOrders);
+  app.get('/api/orders/:userId',verifyUser,CurrentOrders);
+  app.get('/api/orders/:userId/complete',verifyUser,completeOrders);
   app.post(
-    '/api/orders/:order_id/add_product/:product_id',
-    verifyAuth,
+    '/api/orders/:userId/add_product/',
+    verifyUser,
     addProduct
   );
+  app.post('/api/users/:userId/orders/create',verifyUser,create);
 };
 
 export default orderRoutes;

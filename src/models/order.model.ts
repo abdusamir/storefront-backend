@@ -25,13 +25,24 @@ export class OrderStore {
       throw new Error(`Couldn't select user: ${user_id} order - ${err}`);
     }
   }
+  async create(user_id: number): Promise<Order>{
+    try{
+      const conn = await client.connect();
+      const query = 'INSERT INTO orders (user_id, status) VALUES ($1, $2) RETURNING *';
+      const result = await conn.query(query, [user_id,'open']);
+      conn.release();
+      return result.rows[0];
+    }catch (err) {
+      throw new Error(`Couldn't create order: ${user_id} order - ${err}`);
+    }
+  }
   async addProduct(
     quantity: number,
     order_id: number,
     product_id: number
   ): Promise<OrderProducts> {
     const conn = await client.connect();
-    const query = `INSERT INTO order_products (quantity,order_id,product_id) VALUES ($1,$2,$3,$4) RETURNING *`;
+    const query = `INSERT INTO order_products (quantity,order_id,product_id) VALUES ($1,$2,$3) RETURNING *`;
     const result = await conn.query(query, [quantity, order_id, product_id]);
     conn.release();
     return result.rows[0];

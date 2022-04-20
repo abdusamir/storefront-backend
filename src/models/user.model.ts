@@ -66,4 +66,19 @@ export class UserStore {
       );
     }
   }
+
+  async authenticate(email: string, password: string): Promise<User| null>{
+    try{
+      const conn= await client.connect();
+      const query='SELECT * from users WHERE email =$1';
+      const result = await conn.query(query,[email]);
+      conn.release();
+      const user:User=result.rows[0];
+      if(bcrypt.compareSync(password+pepper, user.password as string ))
+        return user;
+      return null
+    }catch(err) {
+      throw new Error("Something went wrong. Please try again");
+    }
+  }
 }

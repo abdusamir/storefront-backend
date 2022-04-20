@@ -8,35 +8,41 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Index 
 - Show
 - Create [token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
+- Products by category (args: product category)
 
 #### Users
 - Index [token required]
 - Show [token required]
-- Create [token required]
+- Create 
+- Authenticate
 
 #### Orders
 - Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- Completed Orders by user (args: user id)[token required]
+- Add product to current order (args: user id) [token required]
+- Create new order [token required]
 
 ## Data Shapes
 #### Product
 -  id
 - name
 - price
-- [OPTIONAL] category
+- category
 
 #### User
 - id
+- email
 - firstName
 - lastName
 - password
 
 #### Orders
 - id
-- id of each product in the order
-- quantity of each product in the order
 - user_id
 - status of order (active or complete)
+
+#### Order_products
+- id
+- product_id
+- order_id
 
