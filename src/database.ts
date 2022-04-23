@@ -10,6 +10,7 @@ const {
   POSTGRES_TEST_DB,
   POSTGRES_USER,
   ENV,
+  DB_PORT
 } = process.env;
 
 const client = new Pool({
@@ -17,5 +18,6 @@ const client = new Pool({
   user: POSTGRES_USER,
   database: ENV === 'dev' ? POSTGRES_DB : POSTGRES_TEST_DB,
   password: POSTGRES_PASSWORD,
+  port:DB_PORT
 });
 export default client;

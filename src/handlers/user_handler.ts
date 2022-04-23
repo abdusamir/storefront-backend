@@ -5,14 +5,16 @@ import { User, UserStore } from '../models/user.model';
 import verifyAuth from '../middlewares/verifyAuth';
 dotenv.config();
 const store = new UserStore();
+
 const index = async (_req: Request, res: Response) => {
   const users: User[] = await store.index();
   res.status(200).json({
     status: 200,
-    users: { ...users },
+    users: users,
     message: 'Request was completed successfully',
   });
 };
+
 const create = async (req: Request, res: Response) => {
   const user: User = req.body;
   try {
@@ -54,21 +56,20 @@ const show = async (req: Request, res: Response) => {
     });
   }
 };
-const authenticate= async(req:Request, res:Response)=>{
-  const {email,password} =req.body;
-  try{
-    const user:User|null= await store.authenticate(email,password);
-    if (user)
-    {
-      const token= jwt.sign({user},process.env.TOKEN_SECRET as string);
+const authenticate = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  try {
+    const user: User | null = await store.authenticate(email, password);
+    if (user) {
+      const token = jwt.sign({ user }, process.env.TOKEN_SECRET as string);
       res.status(200).json(token);
-    }else{
-      res.status(400).json({message: 'Invalid email or password'});
+    } else {
+      res.status(401).json({ message: 'Invalid email or password' });
     }
-  }catch (err){
-    res.status(400).json({message: 'Something went wrong'});
+  } catch (err) {
+    res.status(400).json({ message: 'Something went wrong' });
   }
-}
+};
 const userRoutes = (app: Application) => {
   app.get('/api/users', verifyAuth, index);
   app.post('/api/users', create);
