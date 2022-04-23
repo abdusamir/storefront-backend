@@ -8,7 +8,7 @@ const index = async (_req: Request, res: Response) => {
   const products = await store.index();
   res.status(200).json({
     status: 200,
-    data: { ...products },
+    data: products,
     message: 'Request was successful',
   });
 };
@@ -41,12 +41,12 @@ const create = async (req: Request, res: Response) => {
   }
 };
 const showCategory = async (req: Request, res: Response) => {
-  const category = req.params.id;
+  const category = req.params.category;
   const products: Product[] = await store.showCategory(category);
   if (products.length > 0) {
     res.status(200).json({
       status: 200,
-      data: { ...products },
+      data: products,
       message: 'Request was successful',
     });
   } else {
@@ -59,7 +59,7 @@ const showCategory = async (req: Request, res: Response) => {
 const productRoutes = (app: Application) => {
   app.get('/api/products', index);
   app.get('/api/products/:id', show);
-  app.get('/api/products/category/:id', showCategory);
+  app.get('/api/products/category/:category', showCategory);
   app.post('/api/products', verifyAuth, create);
 };
 export default productRoutes;
