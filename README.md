@@ -8,9 +8,9 @@
 
 ## Table of Contents
 
-### [Installation](##Installation)
-### [Building](##Building)
-### [Testing](##Testing)
+### [Installation](#installation)
+### [Building](#building)
+### [Testing](#testing)
 
 ----
 
