@@ -6,6 +6,11 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ___Table of Contents___
 
+- [API Endpoints](#api-endpoints)
+- [Data Shapes](#data-shapes)
+
+<div id="api-endpoints"></div>
+
 ## API Endpoints
 
 #### Products 
@@ -327,28 +332,50 @@ ___Table of Contents___
         "message": "order created successfully"
       }
     ```
+<div id="data-shapes"></div>
 
 ## Data Shapes
-#### Product
--  id
-- name
-- price
-- category
 
-#### User
-- id
-- email
-- firstName
-- lastName
-- password
+#### Product Schema
 
-#### Orders
-- id
-- user_id
-- status of order (active or complete)
+```sql
+    CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price NUMERIC(17,2) NOT NULL,
+    description TEXT,
+    category VARCHAR(64) NOT NULL
+);
+```
 
-#### Order_products
-- id
-- product_id
-- order_id
+#### User Schema
+
+```sql
+    CREATE TABLE users(
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(50) UNIQUE,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  password VARCHAR(64) NOT NULL
+);
+```
+
+#### Orders Schema 
+```sql
+    CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    status VARCHAR(32) NOT NULL,
+    user_id BIGINT REFERENCES users(id) NOT NULL
+);
+```
+
+#### Order_products Schema
+```sql
+    CREATE TABLE order_products(
+    id SERIAL PRIMARY KEY,
+    quantity INTEGER NOT NULL,
+    order_id INTEGER REFERENCES orders(id) NOT NULL,
+    product_id INTEGER REFERENCES products(id) NOT NULL
+);
+```
 
