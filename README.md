@@ -6,6 +6,12 @@
 ### Development done with TypeScript with Express and PostgreSQL for the backend
 ### Jasmine is used for testing and JWT for Authorization
 
+## Table of Contents
+
+### [Installation](#Installation)
+### [Building](#Building)
+### [Testing](#Testing)
+
 ----
 
 ## Installation
