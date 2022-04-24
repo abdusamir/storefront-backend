@@ -10,7 +10,7 @@ describe('Testing product Endpoints', () => {
     name: 'test',
     price: 10,
     description: 'test description', //
-    category: 'test category',
+    category: 'example',
   };
   beforeAll(async () => {
     const response = await request
@@ -39,7 +39,7 @@ describe('Testing product Endpoints', () => {
       .set('Authorization', `Bearer ${token}`)
       .send(product)
       .expect(200);
-    
+
     expect(response.body.data).toEqual({
       id: response.body.data.id,
       name: product.name,
@@ -48,11 +48,43 @@ describe('Testing product Endpoints', () => {
       category: product.category,
     });
   });
-  it('[POST] /api/products without token', async ()=>{
-      await request
+  it('[POST] /api/products without token', async () => {
+    await request
       .post('/api/products')
       .set('Content-Type', 'application/json')
       .send(product)
       .expect(401);
+  });
+  it('[GET] /api/products should return all products', async () => {
+    const response = await request
+      .get('/api/products')
+      .set('Content-Type', 'application/json')
+      .expect(200);
+    expect(response.body.data.length).toEqual(1);
+  });
+  it('[GET] /api/products/category with existing category', async () => {
+    const response = await request
+      .get(`/api/products/category/${product.category}`)
+      .set('Content-Type', 'application/json')
+      .expect(200);
+    expect(response.body.data.length).toEqual(1);
+  });
+  it('[GET] /api/products/category/:category with non existing category', async () => {
+    await request.get(`/api/products/category/notfound`).expect(404);
+  });
+  it('[GET] /api/products/:id with a real product', async () => {
+    const response = await request
+      .get(`/api/products/1`)
+      .expect(200);
+    expect(response.body.data).toEqual({
+      id: response.body.data.id,
+      name: product.name,
+      price: '10.00',
+      description: product.description,
+      category: product.category,
+    });
+  });
+  it('[GET] /api/products/:id with a fake id', async () => {
+      await request.get(`/api/products/5`).expect(404);
   })
 });
