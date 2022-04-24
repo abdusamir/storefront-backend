@@ -18,7 +18,7 @@ ___Table of Contents___
       N/A
     ```
 
-  - Response Body -- `Array of user products`
+  - Response Body -- `Array of products`
 
     ```json
       {
@@ -41,11 +41,62 @@ ___Table of Contents___
               }
           ]
         },
-        "message": "users retrieved successfully"
+        "message": "Request was successful"
       }
     ```
 - Show
-- Create [token required]
+    - HTTP verb `GET`
+  - Endpoint:- `/api/products/:id`
+  - Request Body
+
+    ```json
+      N/A
+    ```
+
+  - Response Body -- `A single product`
+
+    ```json
+      {
+        "status": 200,
+        "data": 
+              {
+                "id":1,
+                "name":"example",
+                "price":20.3,
+                "description":"test description",
+                "category":"TEST"
+        },
+        "message": "users retrieved successfully"
+      }
+- Create - **`token required`**
+  - HTTP verb `POST`
+  - Endpoint:- `/api/products/`
+  - Request Body
+
+    ```json
+      {
+          "name":"name",
+          "price":20,
+          "description":"description",
+          "category":"category",
+      }
+    ```
+
+  - Response Body -- ``
+
+    ```json
+      {
+        "status": 200,
+        "data": {
+          "name":"name",
+          "price":20,
+          "description":"description",
+          "category":"category",
+      },
+        "message": "Request was successful"
+      }
+    ```
+
 - Products by category (args: product category)
 
 #### Users
