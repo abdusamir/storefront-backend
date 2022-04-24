@@ -6,6 +6,7 @@
   "author": "Sameerjr1 <73047153+Sameerjr1@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
+    "start":"yarn build && node ./dist/index.js",
     "dev": "nodemon src/index.ts",
     "prettier": "prettier --write src/**/*.ts",
     "lint": "eslint src/**/*.ts",

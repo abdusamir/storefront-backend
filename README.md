@@ -18,13 +18,14 @@
 
 ## Installation
 
---- 
 ### First you need to have node and postgres installed on your machine
 ### then clone the repo and in the repo directory open terminal and type
+
 ```bash
   npm i -g yarn db-migrate
   yarn install
 ```
+
 ### now you need to have two databases connections available (one for development and one for testing)
 
 ### The only thing left is to setup your environment varaibles
@@ -33,7 +34,9 @@
 ```bash
   touch .env
 ```
+
 ### then add the following in your .env file
+
 ``` bash
 PORT =3030
 POSTGRES_HOST=localhost
@@ -51,14 +54,11 @@ POSTGRES_PORT=5432
 <div id="building"></div>
 
  ## Building
- 
- ---
 
  ### Open your terminal once again and type
  
  ```bash
  db-migrate up
- yarn build
  yarn start
  ```
  ### and you should see your server running on port 3030 on your localhost
