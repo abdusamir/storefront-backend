@@ -26,21 +26,20 @@ ___Table of Contents___
         "data": 
           [ 
               {
-                "id":1
+                "id":1,
                 "name":"example",
                 "price":20.3,
-                "description":"test description"
+                "description":"test description",
                 "category":"TEST"
               },
               {
-                "id":1
+                "id":2,
                 "name":"example2",
                 "price":20.3,
-                "description":"test description"
+                "description":"test description",
                 "category":"TEST"
               }
-          ]
-        },
+          ],
         "message": "Request was successful"
       }
     ```
@@ -82,7 +81,7 @@ ___Table of Contents___
       }
     ```
 
-  - Response Body -- ``
+  - Response Body -- `The created product`
 
     ```json
       {
@@ -97,13 +96,136 @@ ___Table of Contents___
       }
     ```
 
-- Products by category (args: product category)
+- Products by category
+  - HTTP verb `GET`
+  - Endpoint:- `/api/products/category/:category`
+  - Request Body
+
+    ```json
+      N/A
+    ```
+
+  - Response Body -- `Array of products`
+
+    ```json
+      {
+        "status": 200,
+        "data": 
+          [ 
+              {
+                "id":1,
+                "name":"example",
+                "price":20.3,
+                "description":"test description",
+                "category":"TEST"
+              },
+              {
+                "id":1,
+                "name":"example2",
+                "price":20.3,
+                "description":"test description",
+                "category":"TEST"
+              }
+          ],
+        "message": "Request was successful"
+      }
+    ```
 
 #### Users
-- Index [token required]
-- Show [token required]
+
+- Index - **`token required`**
+  - HTTP verb `GET`
+  - Endpoint:- `/api/users/`
+  - Request Body
+
+    ```json
+      N/A
+    ```
+
+  - Response Body -- `Array of user objects`
+
+    ```json
+      {
+        "status": 200,
+        "users":  [
+            {
+              "id": 1,
+              "email": "example@example.com",
+              "firstName": "John",
+              "lastName": "Smith"
+            }
+          ],
+        "message": "Request was completed successfully"
+      }
+    ```
+    
+- Show - **`token required`**
+  - HTTP verb `GET`
+  - Endpoint:- `/api/users/:id`
+  - Request Body
+
+    ```json
+      N/A
+    ```
+
+  - Response Body -- `A single user`
+
+    ```json
+      {
+        "status": 200,
+        "data": 
+            {
+              "id": 1,
+              "email": "example@example.com",
+              "firstName": "John",
+              "lastName": "Smith"
+            },
+        "message": "User returned successfully"
+      }
+    ```
+
 - Create 
+  - HTTP verb `POST`
+  - Endpoint:- `/api/users/`
+  - Request Body
+
+    ```json
+      {
+          "email":"example@example.com",
+          "first_name":"john",
+          "last_name":"smith",
+          "password":"password123"
+      }
+    ```
+
+  - Response Body -- `A single user`
+
+    ```json
+      {
+        "status": 200,
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJlbWFpbCI6InVzZXIxQGV4YW1wbGUiLCJmaXJzdF9uYW1lIjoiZXhhbXBsZSIsImxhc3RfbmFtZSI6ImV4YW1wbGUifSwiaWF0IjoxNjUwODEwNDg5fQ.Qd3PPaejk7afVc1QvREM3mrxy1wAqahGEDWXltz4Gbc",
+        "message": "User created successfully"
+      }
+    ```
 - Authenticate
+  - HTTP verb `POST`
+  - Endpoint:- `/api/users/`
+  - Request Body
+
+    ```json
+      {
+        "email":"example@example.com"
+        "password":"password123"
+      }
+    ```
+
+  - Response Body -- `A single user`
+
+    ```json
+      {
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJlbWFpbCI6InVzZXIxQGV4YW1wbGUiLCJmaXJzdF9uYW1lIjoiZXhhbXBsZSIsImxhc3RfbmFtZSI6ImV4YW1wbGUifSwiaWF0IjoxNjUwODEwNDg5fQ.Qd3PPaejk7afVc1QvREM3mrxy1wAqahGEDWXltz4Gbc"
+      }
+    ```
 
 #### Orders
 - Current Order by user (args: user id)[token required]
