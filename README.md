@@ -6,14 +6,15 @@
 ### Development done with TypeScript with Express and PostgreSQL for the backend
 ### Jasmine is used for testing and JWT for Authorization
 
+
 ## Table of Contents
 
-### [Installation](#installation)
-### [Building](#building)
-### [Testing](#testing)
+- [Installation](#installation)
+- [Building](#building)
+- [Testing](#testing)
 
 ----
-
+<div id="installation"></div>
 ## Installation
 
 --- 
@@ -46,7 +47,7 @@ SALT_ROUNDS=10
 POSTGRES_PORT=5432
 ```
 ----------------------------------------------------------------
-
+<div id="building"></div>
  ## Building
  
  ---
@@ -61,7 +62,7 @@ POSTGRES_PORT=5432
  ### and you should see your server running on port 3030 on your localhost
 
  ----------------------------------------------------------------
- 
+ <div id="testing"></div>
  ## Testing 
  
  ---
