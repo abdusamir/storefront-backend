@@ -198,7 +198,7 @@ ___Table of Contents___
       }
     ```
 
-  - Response Body -- `A single user`
+  - Response Body -- `JWT token for the created user`
 
     ```json
       {
@@ -219,7 +219,7 @@ ___Table of Contents___
       }
     ```
 
-  - Response Body -- `A single user`
+  - Response Body -- `JWT token`
 
     ```json
       {
@@ -228,10 +228,105 @@ ___Table of Contents___
     ```
 
 #### Orders
-- Current Order by user (args: user id)[token required]
-- Completed Orders by user (args: user id)[token required]
-- Add product to current order (args: user id) [token required]
-- Create new order [token required]
+- Current Order by user - **`token required`**
+  - HTTP verb `GET`
+  - Endpoint:- `/api/orders/:userId`
+  - Request Body
+
+    ```json
+      N/A
+    ```
+
+  - Response Body -- `Array of order objects`
+
+    ```json
+      {
+        "status": 200,
+        "orders":  [
+            {
+              "id": 1,
+              "user_id":1,
+              "status": "open"
+            }
+          ],
+        "message": "Orders returned successfully"
+      }
+    ```
+- Completed Orders by user - **`token required`**
+  - HTTP verb `GET`
+  - Endpoint:- `/api/orders/:userId/complete`
+  - Request Body
+
+    ```json
+      N/A
+    ```
+
+  - Response Body -- `Array of order objects`
+
+    ```json
+      {
+        "status": 200,
+        "orders":  [
+            {
+              "id": 2,
+              "user_id":1,
+              "status": "complete"
+            }
+          ],
+        "message": "Orders returned successfully"
+      }
+    ```
+- Add product to current order - **`token required`**
+  - HTTP verb `POST`
+  - Endpoint:- `/api/orders/:userId/add_product/`
+  - Request Body
+
+    ```json
+      {
+          "quantity":2,
+          "product_id":1,
+          "order_id":1
+      }
+    ```
+
+  - Response Body -- `order product relation`
+
+    ```json
+      {
+        "status": 200,
+        "data": 
+            {
+              "id": 1,
+              "product_id":1,
+              "order_id":1, 
+              "quantity": 2
+            },
+        "message": "item added to order successfully"
+      }
+    ```
+- Create new order [token required]- **`token required`**
+  - HTTP verb `POST`
+  - Endpoint:- `/api/orders/:userId/add_product/`
+  - Request Body
+
+    ```json
+      N/A
+    ```
+
+  - Response Body -- `New created order`
+
+    ```json
+      {
+        "status": 200,
+        "data": 
+            {
+              "id": 1,
+              "user_id":1,
+              "status": "open"
+            },
+        "message": "order created successfully"
+      }
+    ```
 
 ## Data Shapes
 #### Product
