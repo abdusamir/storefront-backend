@@ -11,8 +11,8 @@ const CurrentOrders = async (req: Request, res: Response) => {
     if (orders.length) {
       res.status(200).json({
         status: 200,
-        orders: { ...orders },
-        message: 'Order returned successfully',
+        orders: orders,
+        message: 'Orders returned successfully',
       });
     } else {
       //
@@ -87,7 +87,7 @@ const orderRoutes = (app: Application) => {
   app.get('/api/orders/:userId', verifyUser, CurrentOrders);
   app.get('/api/orders/:userId/complete', verifyUser, completeOrders);
   app.post('/api/orders/:userId/add_product/', verifyUser, addProduct);
-  app.post('/api/users/:userId/orders/create', verifyUser, create);
+  app.post('/api/orders/:userId/create', verifyUser, create);
 };
 
 export default orderRoutes;
