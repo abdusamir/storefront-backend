@@ -73,9 +73,7 @@ describe('Testing product Endpoints', () => {
     await request.get(`/api/products/category/notfound`).expect(404);
   });
   it('[GET] /api/products/:id with a real product', async () => {
-    const response = await request
-      .get(`/api/products/1`)
-      .expect(200);
+    const response = await request.get(`/api/products/1`).expect(200);
     expect(response.body.data).toEqual({
       id: response.body.data.id,
       name: product.name,
@@ -85,6 +83,6 @@ describe('Testing product Endpoints', () => {
     });
   });
   it('[GET] /api/products/:id with a fake id', async () => {
-      await request.get(`/api/products/5`).expect(404);
-  })
+    await request.get(`/api/products/5`).expect(404);
+  });
 });
