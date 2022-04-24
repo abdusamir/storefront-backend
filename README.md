@@ -8,9 +8,9 @@
 
 ## Table of Contents
 
-### [Installation](#Installation)
-### [Building](#Building)
-### [Testing](#Testing)
+### [Installation](##Installation)
+### [Building](##Building)
+### [Testing](##Testing)
 
 ----
 
@@ -45,6 +45,8 @@ BCRYPT_PASSWORD=your-password
 SALT_ROUNDS=10
 POSTGRES_PORT=5432
 ```
+----------------------------------------------------------------
+
  ## Building
  
  ---
@@ -57,7 +59,8 @@ POSTGRES_PORT=5432
  yarn start
  ```
  ### and you should see your server running on port 3030 on your localhost
- 
+
+ ----------------------------------------------------------------
  
  ## Testing 
  
