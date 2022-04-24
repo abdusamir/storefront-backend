@@ -3,9 +3,47 @@ The company stakeholders want to create an online storefront to showcase their g
 
 These are the notes from a meeting with the frontend developer that describe what endpoints the API needs to supply, as well as data shapes the frontend and backend have agreed meet the requirements of the application. 
 
+
+___Table of Contents___
+
 ## API Endpoints
-#### Products
-- Index 
+
+#### Products 
+- Index
+  - HTTP verb `GET`
+  - Endpoint:- `/api/products/`
+  - Request Body
+
+    ```json
+      N/A
+    ```
+
+  - Response Body -- `Array of user products`
+
+    ```json
+      {
+        "status": 200,
+        "data": 
+          [ 
+              {
+                "id":1
+                "name":"example",
+                "price":20.3,
+                "description":"test description"
+                "category":"TEST"
+              },
+              {
+                "id":1
+                "name":"example2",
+                "price":20.3,
+                "description":"test description"
+                "category":"TEST"
+              }
+          ]
+        },
+        "message": "users retrieved successfully"
+      }
+    ```
 - Show
 - Create [token required]
 - Products by category (args: product category)

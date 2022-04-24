@@ -15,6 +15,7 @@
 
 ----
 <div id="installation"></div>
+
 ## Installation
 
 --- 
@@ -48,6 +49,7 @@ POSTGRES_PORT=5432
 ```
 ----------------------------------------------------------------
 <div id="building"></div>
+
  ## Building
  
  ---
@@ -63,6 +65,7 @@ POSTGRES_PORT=5432
 
  ----------------------------------------------------------------
  <div id="testing"></div>
+
  ## Testing 
  
  ---
