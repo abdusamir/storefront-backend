@@ -42,10 +42,16 @@ export class OrderStore {
     order_id: number,
     product_id: number
   ): Promise<OrderProducts> {
-    const conn = await client.connect();
-    const query = `INSERT INTO order_products (quantity,order_id,product_id) VALUES ($1,$2,$3) RETURNING *`;
-    const result = await conn.query(query, [quantity, order_id, product_id]);
-    conn.release();
-    return result.rows[0];
+    try {
+      const conn = await client.connect();
+      const query = `INSERT INTO order_products (quantity,order_id,product_id) VALUES ($1,$2,$3) RETURNING *`;
+      const result = await conn.query(query, [quantity, order_id, product_id]);
+      conn.release();
+      return result.rows[0];
+    } catch (err) {
+      throw new Error(
+        `Couldn't add product ${product_id} to order ${order_id}- ${err}`
+      );
+    }
   }
 }
