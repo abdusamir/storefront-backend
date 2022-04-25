@@ -30,10 +30,9 @@ ___Table of Contents___
 ----------------------------------------------------------------
 <div id="config"></div>
 
-## Project configurations
+## Project Configurations
 
-### Database config
-<tr>
+### ***Database Config***
 
 ### We will now start by creating two databases (one for testing and one for development)
 ### First you must have PostgreSQL installed and added to your environment varaibles
@@ -52,8 +51,7 @@ ___Table of Contents___
 
 ### Now you successfully created the necessary databases to start the project. 
 
-### Environment Variables Config
-<tr>
+### ***Environment Variables Config***
 
 ### The only thing left is to setup your environment varaibles
 ### in terminal type
