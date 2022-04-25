@@ -7,9 +7,10 @@
 ### Jasmine is used for testing and JWT for Authorization
 
 
-## Table of Contents
+___Table of Contents___
 
 - [Installation](#installation)
+- [Configuration](#config)
 - [Building](#building)
 - [Testing](#testing)
 
@@ -26,8 +27,6 @@
   yarn install
 ```
 
-### now you need to have two databases connections available (one for development and one for testing)
-
 ### The only thing left is to setup your environment varaibles
 ### in terminal type
 
@@ -40,17 +39,41 @@
 ``` bash
 PORT =3030
 POSTGRES_HOST=localhost
-POSTGRES_DB=your-database-name
-POSTGRES_USER=your-username
-POSTGRES_TEST_DB=your-testing-database
-POSTGRES_PASSWORD=your-password
+POSTGRES_DB=storefront
+POSTGRES_USER=storefront_user
+POSTGRES_TEST_DB=storefront_test
+POSTGRES_PASSWORD=password123
 ENV=dev
 TOKEN_SECRET=your-secret-token
 BCRYPT_PASSWORD=your-password
 SALT_ROUNDS=10
 POSTGRES_PORT=5432
 ```
+
 ----------------------------------------------------------------
+<div id="config"></div>
+
+## Configure database
+
+### We will now start by creating two databases (one for testing and one for development)
+### First you must have PostgreSQL installed and added to your environment varaibles
+### open terminal and type the following to create the databases
+
+```sql
+  psql postgres
+  CREATE USER storefront_user WITH PASSWORD 'password123';
+  CREATE DATABASE storefront;
+  \c storefront
+  GRANT ALL PRIVILEGES ON DATABASE storefront TO storefront_user;
+  CREATE DATABASE storefront_test;
+  \c storefront_test
+  GRANT ALL PRIVILEGES ON DATABASE storefront_test TO storefront_user;
+```
+
+### Now you successfully created the necessary databases to start the project. 
+
+----------------------------------------------------------------
+
 <div id="building"></div>
 
  ## Building
@@ -61,7 +84,9 @@ POSTGRES_PORT=5432
  db-migrate up
  yarn start
  ```
- ### and you should see your server running on port 3030 on your localhost
+ 
+ ### Now express Server should be running on port 3030 and PostgreSQL Server is running on port 5432
+ ### Open any browser any type localhost:3030/ and you should see the home page of the API.
 
  ----------------------------------------------------------------
  <div id="testing"></div>
