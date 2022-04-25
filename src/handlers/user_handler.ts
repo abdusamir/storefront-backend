@@ -8,11 +8,17 @@ const store = new UserStore();
 
 const index = async (_req: Request, res: Response) => {
   const users: User[] = await store.index();
+  try{
   res.status(200).json({
     status: 200,
     users: users,
     message: 'Request was completed successfully',
   });
+}catch(err){
+  res.status(400).json({
+    message: 'could now return users'
+  });
+}
 };
 
 const create = async (req: Request, res: Response) => {
